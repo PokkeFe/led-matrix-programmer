@@ -1,0 +1,94 @@
+:root {
+    --interactive-normal: #b9bbbe;
+    --interactive-hover: #dcddde;
+    --interactive-active: #fff;
+    --interactive-muted: #4f545c;
+    --background-primary: #36393f;
+    --background-secondary: #2f3136;
+    --background-secondary-alt: #292b2f;
+    --background-tertiary: #202225;
+    --background-accent: #4f545c;
+    --background-floating: #18191c;
+    --appbar-title: #9ea0a3;
+}
+
+#pk-appbar {
+  margin: 0;
+  padding: 0;
+  height: 22px;
+  width: 100%;
+  background-color: var(--background-secondary);
+
+  display: flex;
+
+  -webkit-app-region: drag;
+}
+
+#pk-appbar .left, #pk-appbar .right {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  overflow: hidden;
+  color: var(--interactive-normal);
+}
+
+#pk-appbar .left {
+  flex-grow: 1;
+  margin-left: 0.5em;
+}
+
+#pk-appbar .right {
+  flex-flow: row-reverse;
+}
+
+
+#pk-appbar .title {
+  font-family: Consolas, sans-serif;
+  letter-spacing: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-app-region: drag;
+  color: var(--appbar-title);
+}
+
+#close-btn {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  -webkit-app-region: no-drag;
+}
+
+#close-btn:hover {
+  background-color: #f04747;
+  color: #dcddde;
+}
+
+#maximize-btn {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  -webkit-app-region: no-drag;
+}
+
+#maximize-btn:hover {
+  background-color: rgba(79, 84, 92, 0.16);
+  color: #dcddde;
+}
+
+#minimize-btn {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  -webkit-app-region: no-drag;
+}
+
+#minimize-btn:hover {
+  background-color: rgba(79, 84, 92, 0.16);
+  color: #dcddde;
+}
