@@ -5,26 +5,15 @@
     <meta charset='utf-32'>
     </meta>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="style/main.css" type="text/css" />
     <link rel="stylesheet" href="pk-appbar/pk-appbar.css" type="text/css" ></link>
     <script src="pk-appbar/pk-appbar.js"></script>
-    <style>
-      body{
-        padding: 0;
-        margin: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-      }
-
-      canvas {
-      }
-    </style>
   </head>
 
   <body>
     <div id="pk-appbar">
       <div class="left">
-        <div class="title">p5.js</div></div>
+        <div class="title">led matrix utility</div></div>
       <div class="right">
         <!-- X button -->
         <div id="close-btn">
@@ -46,8 +35,17 @@
         </div>
       </div>
     </div>
+
+    <div id="mainContent">
+      <input id="ipInput" placeholder="ip address"/>
+      <button id="uploadButton">upload</button>
+      
+      <div id="matrix"></div>
+    </div>
+
   </body>
 
   <script src="p5/p5.min.js"></script>
   <script src="p5/sketch.js"></script>
+  <script src="scripts/main.js"></script>
 </html>
