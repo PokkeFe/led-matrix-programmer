@@ -13,9 +13,13 @@ class Frame {
         // Initialize the array with false booleans
         this.values = Array(MATRIX_HEIGHT * MATRIX_WIDTH).fill(false)
 
+        this.on_values_changed = new Observable()
+
         // Display length (uint8)
         this.frames_held = 1
     }
+
+    /* Setters and Getters */
 
     /**
     * Setter for frames_held to limit the values to uint8 range.
@@ -24,6 +28,19 @@ class Frame {
         if(new_value > 255 || new_value < 0) throw new RangeError("frames_held is a uint8 and cannot represent values outside of [0-255]")
         return new_value
     }
+
+    /**
+     * Sets the frame value at a the given index
+     * @param {number} index 
+     * @param {boolean} new_value 
+     */
+    setValue(index, new_value) {
+        this.values[index] = new_value
+        this.on_values_changed.notify()
+    }
+
+
+    /* Export functions */
 
     getValuesAsHexString() {
         let hexstring_array = []
@@ -57,6 +74,7 @@ class Frame {
      */
     invert() {
         this.values = this.values.map(v => !v)
+        this.on_values_changed.notify()
     }
 
     /**
@@ -65,5 +83,6 @@ class Frame {
      */
     fill(v) {
         this.values = this.values.fill(v)
+        this.on_values_changed.notify()
     }
 }

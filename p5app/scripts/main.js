@@ -18,6 +18,7 @@ let matrix_element = document.getElementById("matrix")
 let matrix_buttons = []
 
 let active_frame = new Frame()
+active_frame.on_values_changed.subscribe(recalculateEditorMatrix)
 
 // Create our button matrix
 for (let row = 0; row < MATRIX_HEIGHT; row++) {
@@ -38,19 +39,11 @@ matrix_element.addEventListener("click", (ev) => {
         let button = ev.target
         let button_id = parseInt(button.getAttribute("button-id"))
         // Invert the value in the active frame
-        active_frame.values[button_id] = !active_frame.values[button_id]
-        // Refresh the relevant button
-        if(active_frame.values[button_id] == true) {
-            matrix_buttons[button_id].classList.add('active')
-        } else {
-            matrix_buttons[button_id].classList.remove('active')
-        }
-        console.log(active_frame.getValuesAsHexString())
+        active_frame.setValue(button_id, !active_frame.values[button_id])
     }
 })
 
 function recalculateEditorMatrix() {
-    console.log("Recalculating Matrix")
     for(array_index in active_frame.values) {
         if(active_frame.values[array_index] == true) {
             matrix_buttons[array_index].classList.add("active")

@@ -43,9 +43,9 @@
       <div id="matrixEditor">
         <div id="matrix"></div>
         <div id="matrixEditorControls">
-          <button onclick="(() => {active_frame.fill(false);recalculateEditorMatrix()})()">Empty</button>
-          <button onclick="(() => {active_frame.fill(true);recalculateEditorMatrix()})()">Fill</button>
-          <button onclick="(() => {active_frame.invert();recalculateEditorMatrix()})()">Invert</button>
+          <button onclick="active_frame.fill(false)">Empty</button>
+          <button onclick="active_frame.fill(true)">Fill</button>
+          <button onclick="active_frame.invert()">Invert</button>
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@
   <script src="p5/p5.min.js"></script>
   <script src="p5/sketch.js"></script>
   <script src="scripts/const.js"></script>
+  <script src="scripts/observable.js"></script>
   <script src="scripts/frame.js"></script>
   <script src="scripts/main.js"></script>
 </html>
