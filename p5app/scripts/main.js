@@ -48,3 +48,14 @@ matrix_element.addEventListener("click", (ev) => {
         console.log(active_frame.getValuesAsHexString())
     }
 })
+
+function recalculateEditorMatrix() {
+    console.log("Recalculating Matrix")
+    for(array_index in active_frame.values) {
+        if(active_frame.values[array_index] == true) {
+            matrix_buttons[array_index].classList.add("active")
+        } else {
+            matrix_buttons[array_index].classList.remove("active")
+        }
+    }
+}

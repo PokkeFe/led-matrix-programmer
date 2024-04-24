@@ -49,4 +49,21 @@ class Frame {
     getAsHexString() {
         return this.getHeadersAsHexString() + this.getValuesAsHexString()
     }
+
+    /* Frame value manipulation functions */
+
+    /**
+     * Inverts all values in a frame (1 -> 0, 0 -> 1)
+     */
+    invert() {
+        this.values = this.values.map(v => !v)
+    }
+
+    /**
+     * Sets all values with a given bool.
+     * @param {boolean} v Boolean value to fill the array with. 
+     */
+    fill(v) {
+        this.values = this.values.fill(v)
+    }
 }

@@ -40,7 +40,14 @@
       <input id="ipInput" placeholder="ip address"/>
       <button id="uploadButton">upload</button>
       
-      <div id="matrix"></div>
+      <div id="matrixEditor">
+        <div id="matrix"></div>
+        <div id="matrixEditorControls">
+          <button onclick="(() => {active_frame.fill(false);recalculateEditorMatrix()})()">Empty</button>
+          <button onclick="(() => {active_frame.fill(true);recalculateEditorMatrix()})()">Fill</button>
+          <button onclick="(() => {active_frame.invert();recalculateEditorMatrix()})()">Invert</button>
+        </div>
+      </div>
     </div>
 
   </body>

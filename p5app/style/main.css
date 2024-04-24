@@ -23,3 +23,8 @@ body {
 #matrix .matrix-button.active {
     background-color: red;
 }
+
+#matrixEditor {
+    display: flex;
+    flex-direction: row;
+}
