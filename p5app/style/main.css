@@ -1,17 +1,44 @@
+:root {
+    --main-bg-color: rgb(51, 51, 51);
+    --secondary-bg-color: rgb(58, 58, 58);
+    --tertiary-bg-color: rgb(95, 95, 95);
+    --light-bg-color: rgb(122, 122, 122);
+    --border-1-color: rgb(88, 88, 88);
+}
+
 body {
     padding: 0;
     margin: 0;
-    background-color: rgb(51, 51, 51);
+    background-color: var(--main-bg-color);
 }
 
-#matrix {
+#frameEditor {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#frameEditor.disabled::after {
+    content: 'DISABLED';
+    color: white;
+    text-align: center;
+    display: block;
+    position: absolute;
+    left:0;
+    right:0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(69, 69, 69, 0.8);
+}
+
+#frameEditor>div[data-role="values"] {
     margin: 10px;
     padding: 10px;
     border: 1px solid rgb(100, 100, 100);
     width: fit-content;
 }
 
-#matrix .matrix-button {
+#frameEditor>div[data-role="values"] .matrix-button {
     width: 30px;
     height: 30px;
     border-radius: 15px;
@@ -20,11 +47,55 @@ body {
     margin: 1px;
 }
 
-#matrix .matrix-button.active {
+#frameEditor>div[data-role="values"] .matrix-button.active {
     background-color: red;
 }
 
-#matrixEditor {
+#frameReel {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#frameReel div[data-role="frame-number"] {
+    background-color: var(--tertiary-bg-color);
+    padding-left: 0.2em;
+}
+
+#frameReel div.matrix-row {
+    display: flex;
+    flex-direction: row;
+}
+
+#frameReel .frameReelItem {
+    border: 1px solid var(--secondary-bg-color);
+    box-sizing: border-box;
+    margin: 2px;
+    padding: 2px;
+    width: fit-content;
+    background-color: var(--secondary-bg-color);
+}
+
+#frameReel .frameReelItem.active {
+    border: 1px solid red;
+}
+
+#frameReel .frameReelItem:hover {
+    background-color: rgb(100, 100, 100)
+}
+
+#frameReel .frameReelItem div[data-role='controls'] button {
+    border: 0;
+    background-color: var(--secondary-bg-color);
+}
+
+#frameReel div.matrix-item {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgb(69, 69, 69);
+}
+
+#frameReel div.matrix-item.active {
+    background-color: red;
 }

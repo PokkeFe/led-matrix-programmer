@@ -8,47 +8,35 @@ upload_button.addEventListener("click", (elem, ev) => {
     let ip = ip_addr_elem.value
     fetch(`http://${ip}/set`, {
         method: "POST",
-        body: active_frame.getValuesAsHexString(),
+        body: active_reel_item.frame.getValuesAsHexString(),
     })
 })
 
-/* Matrix */
-let matrix_element = document.getElementById("matrix")
+/* Frame Reel */
 
-let matrix_buttons = []
+let first_reel_item = null
 
-let active_frame = new Frame()
-active_frame.on_values_changed.subscribe(recalculateEditorMatrix)
-
-// Create our button matrix
-for (let row = 0; row < MATRIX_HEIGHT; row++) {
-    let row_element = document.createElement("div")
-    row_element.classList.add("matrix-row")
-    for (let col = 0; col < MATRIX_WIDTH; col++) {
-        let button = document.createElement("button")
-        button.classList.add("matrix-button")
-        button.setAttribute("button-id", (row * MATRIX_WIDTH) + col)
-        row_element.append(button)
-        matrix_buttons.push(button)
+function createFirstReelItem() {
+    let new_reel_item = new FrameReelItem()
+    if(first_reel_item != null) {
+        new_reel_item.next_reel_item = first_reel_item
+        first_reel_item.previous_reel_item = new_reel_item
     }
-    matrix_element.append(row_element)
+    first_reel_item = new_reel_item
+    setActiveReelItem(new_reel_item)
 }
 
-matrix_element.addEventListener("click", (ev) => {
-    if (ev.target.classList.contains("matrix-button")) {
-        let button = ev.target
-        let button_id = parseInt(button.getAttribute("button-id"))
-        // Invert the value in the active frame
-        active_frame.setValue(button_id, !active_frame.values[button_id])
+function recalculateReelItemIDs() {
+    let cur_reel_item = first_reel_item
+    let id = 0
+    while(cur_reel_item != null) {
+        cur_reel_item.frame_number = id
+        id += 1
+        cur_reel_item = cur_reel_item.next_reel_item
     }
+}
+
+window.addEventListener("load", () => {
+    createFirstReelItem()
+    recalculateReelItemIDs()
 })
-
-function recalculateEditorMatrix() {
-    for(array_index in active_frame.values) {
-        if(active_frame.values[array_index] == true) {
-            matrix_buttons[array_index].classList.add("active")
-        } else {
-            matrix_buttons[array_index].classList.remove("active")
-        }
-    }
-}

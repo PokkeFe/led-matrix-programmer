@@ -40,22 +40,38 @@
       <input id="ipInput" placeholder="ip address"/>
       <button id="uploadButton">upload</button>
       
-      <div id="matrixEditor">
-        <div id="matrix"></div>
-        <div id="matrixEditorControls">
-          <button onclick="active_frame.fill(false)">Empty</button>
-          <button onclick="active_frame.fill(true)">Fill</button>
-          <button onclick="active_frame.invert()">Invert</button>
+      <div id="frameEditor">
+        <div data-role="values"></div>
+        <div data-role="controls">
+          <button onclick="active_reel_item.frame.fill(false)">Empty</button>
+          <button onclick="active_reel_item.frame.fill(true)">Fill</button>
+          <button onclick="active_reel_item.frame.invert()">Invert</button>
         </div>
+      </div>
+      <div id="frameReel">
+        <template id="frameReelItemTemplate">
+          <div class="frameReelItem" title="Frame">
+            <div class="frameReelItemInfo">
+              <div data-role="frame-number"></div>
+              <div data-role="values"></div>
+            </div>
+            <div data-role="controls">
+              <button class="insert-frame" title="Insert Before" data-exec="insert-before">+</button>
+              <button class="edit-frame" title="Edit" data-exec="edit">e</button>
+              <button class="delete-frame" title="Delete" data-exec="delete">d</button>
+              <button class="insert-frame" title="Insert After" data-exec="insert-after">+</button>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
 
   </body>
 
-  <script src="p5/p5.min.js"></script>
-  <script src="p5/sketch.js"></script>
   <script src="scripts/const.js"></script>
   <script src="scripts/observable.js"></script>
   <script src="scripts/frame.js"></script>
+  <script src="scripts/frame_reel_item.js"></script>
+  <script src="scripts/frame_editor.js"></script>
   <script src="scripts/main.js"></script>
 </html>
