@@ -6,6 +6,8 @@ from machine import Pin, SPI
 import time
 import max7219
 import config
+import _thread
+import utime
 
 # Network Setup
 
@@ -31,6 +33,21 @@ display = max7219.Matrix8x8(spi, Pin(17, Pin.OUT), 1)
 display.fill(0)
 display.brightness(0)
 display.show()
+
+# Animation Sequence Data Structure
+animation = []
+
+
+# Handle Request Body
+def handle_request_body(body):
+    frames = body.split('\n')
+    global animation
+    animation = []
+    for frame_string in frames:
+        if frame_string != "":
+            frame_data = tuple(frame_string.split("|"))
+            animation.append(frame_data)
+    print("Animation Updated: ", animation)
 
 # Function to set display from request
 def handle_set_display_request(display_hexstring):
@@ -61,7 +78,7 @@ def handle_request(client):
     # Get the desired state
     if b'POST /set' in request:
         body = decoded_request.split('\r\n\r\n')[1]
-        handle_set_display_request(body)
+        handle_request_body(body)
 
     # Send the HTML response with the button
     response = f"""HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n
@@ -86,6 +103,17 @@ print("Server started. Listening on port 80")
 # Create a list to monitor sockets for readability
 sockets = [server_socket]
 
+# Launch Animation Thread
+def second_thread():
+    while True:
+        if len(animation) > 0:
+            for frame_data in animation:
+                handle_set_display_request(frame_data[1])
+                utime.sleep(1)
+        else:
+            utime.sleep(1)
+
+_thread.start_new_thread(second_thread, ())
 
 
 # Main Loop

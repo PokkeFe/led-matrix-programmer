@@ -8,7 +8,7 @@ upload_button.addEventListener("click", (elem, ev) => {
     let ip = ip_addr_elem.value
     fetch(`http://${ip}/set`, {
         method: "POST",
-        body: active_reel_item.frame.getValuesAsHexString(),
+        body: getFrameReelPayload(),
     })
 })
 
@@ -34,6 +34,19 @@ function recalculateReelItemIDs() {
         id += 1
         cur_reel_item = cur_reel_item.next_reel_item
     }
+}
+
+function getFrameReelPayload() {
+    let payload = ""
+    let current_reel_item = first_reel_item
+    while (current_reel_item != null) {
+        payload += current_reel_item.frame.getHeadersAsHexString()
+        payload += "|"
+        payload += current_reel_item.frame.getValuesAsHexString()
+        payload += "\n"
+        current_reel_item = current_reel_item.next_reel_item
+    }
+    return payload
 }
 
 window.addEventListener("load", () => {
