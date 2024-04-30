@@ -16,7 +16,7 @@ class Frame {
         this.on_values_changed = new Observable()
 
         // Display length (uint8)
-        this.frames_held = 1
+        this._frames_held = 1
     }
 
     /* Setters and Getters */
@@ -26,7 +26,11 @@ class Frame {
     */
     set frames_held(new_value) {
         if(new_value > 255 || new_value < 0) throw new RangeError("frames_held is a uint8 and cannot represent values outside of [0-255]")
-        return new_value
+        this._frames_held = new_value
+    }
+
+    get frames_held() {
+        return this._frames_held
     }
 
     /**
