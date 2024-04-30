@@ -1,32 +1,32 @@
-# p5.js Electron Boilerplate
+# LED Matrix Programmer
 
-Kickstart development on a dynamic p5.js desktop sketch, featuring custom application bar and dynamic window-fitting canvas.
+Electron app and Micropython software for creating, uploading, and displaying animations on a MAX7219 8 by 8 dot matrix LED display driven by a Pi Pico W
 
-### Empty Canvas
+### Demo
 
-![Plain Canvas](/images/empty-canvas.png)
-
-### Example Sketch
-
-![Rotating Sketch](/images/rotate.gif)
+![Example Demo](/images/example.gif)
 
 # How to use
 
-The project directory is located in the `p5app` folder. 
+The electron app's project directory is located in the `p5app` folder. 
+
+The Micropython code for the Pico W is in the `pico` folder.
 
 ### To run:
+
+Upload the Micropython code to the Pico using a tool like Thonny. If the proper `config.py` file is also present and contains the proper variables, the Pico should log its IP for use in the app.
+
+To run the app:
+
 ```
 cd p5app 
 npm install
 npm start
 ```
-The project ships with the `electron-reload` package, which automatically reloads the window on source file changes.
-
-Simply edit `index.html` to change the app title on the application bar, and fill `p5/sketch.js` with your p5 sketch!
-
-*Note: the sketch.js file contains starter code to fill background color and handle window resizing.*
 
 ### Tips:
+
+ - Make sure you change the SPI pins to match your wiring.
 
  - To access the console for development, use the keybind `ctrl-shift-i` on the application to access the developer menu.
 
