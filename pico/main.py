@@ -3,6 +3,7 @@ import uselect as select
 import ubinascii
 import network
 from machine import Pin, SPI
+import time
 import max7219
 import config
 
@@ -31,10 +32,6 @@ display.fill(0)
 display.brightness(0)
 display.show()
 
-brightness_level = 0
-max_brightness = 15
-brightness_change = 1
-
 # Function to set display from request
 def handle_set_display_request(display_hexstring):
     # Reset the display
@@ -60,7 +57,6 @@ def handle_request(client):
     
     request = client.recv(1024)
     decoded_request = request.decode("utf-8")
-    print("Received request:\n", decoded_request)
 
     # Get the desired state
     if b'POST /set' in request:
@@ -106,9 +102,4 @@ while True:
             # Data received on a client socket, handle the request
             handle_request(sock)
             sockets.remove(sock)
-    
-    display.brightness(brightness_level)
-    brightness_level += brightness_change
-    if brightness_level == max_brightness or brightness_level == 0:
-        brightness_change = -brightness_change
 
